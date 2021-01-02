@@ -12,7 +12,7 @@ pipeline {
       }
       steps {
         script {
-          app = docker.build('richardluo0506/demo')
+          app = docker.build('richardluo0506/devops')
         }
       }
     }
@@ -38,7 +38,7 @@ pipeline {
         sshagent (credentials: ['5e322410-00af-4ee3-b2ff-6bf5ffd0f194']) {
           script {
             sh "ssh $USERNAME@$SERVER docker ps"
-            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker pull richardluo0506/demo:latest\""
+            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker pull richardluo0506/devops:latest\""
             try {
                 sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker stop hello\""
                 sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker rm hello\""
